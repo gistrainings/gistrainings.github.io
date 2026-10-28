@@ -15,7 +15,7 @@
 const SITE = {
   name: "GIS Trainings",                   
   description: "Hands-on GIS training in QGIS, ArcGIS and Google Earth Pro for companies, government agencies and research groups. We’ve taught teams in Canada, Europe and Asia, in person and online.",
-  trainersIntro: "Between us we bring more than a decade of industry work in enterprise GIS and spatial databases, and current PhD research in spatial epidemiology, spatio-temporal modeling and machine learning.",
+  trainersIntro: "Between us we bring more than a decade of industry work in enterprise GIS and spatial databases, and current PhD research in spatial epidemiology, spatio-temporal modeling, time series modeling, anomaly detection and machine learning.",
   contactText: "Tell us who you’re training, how many people, and what they need to do with GIS afterwards. We’ll get back to you with a proposed course outline.",
   email: "learn.gistrainings@gmail.com",             
   terrainSeed: 7                             
@@ -26,15 +26,25 @@ const SITE = {
    "shortName" is what the trainings list uses, e.g. "With Mateen and Poshan".
    "photo" can be left empty ("") to show initials, or point to an image in your repo,
    e.g. "images/mateen.jpg".
+   "bio" is a list of short bullet points; keep them to roughly one line each.
+   Wrap words in **double asterisks** to make them bold, e.g. "**ArcGIS Enterprise**".
    Links left empty ("") are simply not shown. */
 const TRAINERS = [
   {
     id: "mateen",
     name: "Muhammad Mateen Mahmood",
     shortName: "Mateen",
-    role: "Enterprise GIS and spatial databases",
-    bio: "Experienced GIS professional with over a decade of expertise in geospatial technologies, spatial data analysis, and enterprise GIS development. Skilled in implementing ESRI Utility Network, architecting ArcGIS Enterprise platforms, and administering Spatial Databases with advanced SQL/PLSQL workflows. Proficient in ESRI’s suite, FME, MapInfo, SpatialNet, and Hexagon technologies, with strong capability in building scalable solutions for mapping, integration, and analysis. Passionate about spatial data science and spatio-temporal modeling, with Journal publications, consultancy projects and the ability to excel independently or collaboratively. Dedicated to continuous learning and driving successful geospatial outcomes.",
-    photo: "images/mateen.jpg",
+    role: "Enterprise GIS and Spatial databases",
+    bio: [
+      "More than ten years in geospatial technology, spatial data analysis and enterprise GIS development, building scalable solutions for mapping, data integration and analysis.",
+      "Implements ESRI Utility Network, ESRI’s system for modeling and managing utility networks such as electricity, gas and water.",
+      "Designs and sets up **ArcGIS Enterprise** platforms that let organizations share maps, data and apps across their teams.",
+      "Administers spatial databases and builds advanced SQL and PL/SQL workflows for storing, querying and processing large geospatial datasets.",
+      "Works across the ESRI suite, FME, MapInfo, SpatialNet and Hexagon, so is at home with whichever platform an organization already uses.",
+      "Brings spatial data science and spatio-temporal modeling into practice, backed by journal publications and consultancy projects.",
+      "BE in Geographical Information Systems from NUST, Pakistan, and a Joint MSc in Geospatial Technologies from universities in Spain, Portugal and Germany."
+    ],
+    photo: "images/mateen.jpeg",
     links: { email: "", linkedin: "", website: "" }
   },
   {
@@ -42,7 +52,14 @@ const TRAINERS = [
     name: "Poshan Niraula",
     shortName: "Poshan",
     role: "Spatial epidemiology and analysis",
-    bio: "Currently pursuing a PhD at the Institute for Geoinformatics, University of Münster, with a specialization in spatial epidemiology. A background in geomatics engineering, complemented by a Master’s degree in Geospatial Technologies, focusing on advanced spatial data analysis and processing techniques. Proficient in geographic information science, with expertise in spatial analysis, spatio-temporal modeling, and the application of modern technologies to address complex challenges in the field of spatial epidemiology.",
+    bio: [
+      "PhD candidate at the Institute for Geoinformatics, University of Münster (since 2023), modeling how human mobility shapes the spread of infectious diseases like COVID-19.",
+      "Journal articles, and talks at international conferences. Best Poster award at GeoMed 2026 in Pamplona.",
+      "Survey Officer at the Department of Survey, Nepal (2014–2023). Helped digitize the country’s land records by building and rolling out the NeLIS cadastral system.",
+      "Teaches spatial data science with R and spatiotemporal data analysis at Münster; previously taught Web GIS at Kathmandu University and Nepal Open University.",
+      "Trained government survey staff in mapping and GIS, and taught OpenStreetMap and QGIS to NGOs and humanitarian teams with Kathmandu Living Labs.",
+      "R, Python, JavaScript, PostGIS, Git and Docker. Geomatics Engineering degree and an Erasmus Mundus MSc in Geospatial Technologies."
+    ],
     photo: "images/poshan.jpg",
     links: { email: "", linkedin: "", website: "" }
   },
@@ -50,8 +67,16 @@ const TRAINERS = [
     id: "saadoon",
     name: "Sahibzada Saadoon Hammad",
     shortName: "Saadoon",
-    role: "GIS development and machine learning",
-    bio: "GIS and geospatial technology professional with over seven years of experience in the GIS and IT industries. Holds a BE in Geographical Information Systems from NUST, Pakistan, and a Joint MSc in Geospatial Technologies from Universitat Jaume I, Universidade NOVA de Lisboa, and the University of Münster. Currently a PhD candidate at the GEOTEC Research Group, specialising in geospatial data analysis, GIS development, and machine learning. Proficient in ArcGIS, QGIS, JavaScript, Leaflet, GeoServer, PostGIS, and Python-based data analysis using libraries such as Pandas, GeoPandas, Scikit-learn, and TensorFlow. Over the past three years, has also trained GIS professionals in geospatial technologies, GIS workflows, and spatial data analysis.",
+    role: "GIS development and Machine learning",
+    bio: [
+      "More than seven years across the GIS and IT industries, combining spatial analysis with software development.",
+      "Three years of training GIS professionals in geospatial technologies, GIS workflows and spatial data analysis.",
+      "PhD candidate at the GEOTEC Research Group, Universitat Jaume I, specializing in geospatial data analysis, GIS development and machine learning.",
+      "Research and hands-on work in time series modeling, anomaly detection and machine learning.",
+      "Builds web maps and GIS applications with JavaScript, Leaflet, GeoServer and PostGIS, alongside desktop work in ArcGIS and QGIS.",
+      "Analyzes spatial data in Python with Pandas and GeoPandas, and builds machine learning models with Scikit-learn and TensorFlow.",
+      "BE in Geographical Information Systems from NUST, Pakistan, and a Joint MSc in Geospatial Technologies from universities in Spain, Portugal and Germany."
+    ],
     photo: "images/saadoon.jpg",
     links: { email: "", linkedin: "", website: "" }
   }
@@ -270,7 +295,10 @@ a { color: var(--water); text-underline-offset: 0.18em; }
 }
 .trainer:target .trainer-name .hl { background-size: 100% 0.35em; transition: background-size 0.6s ease-out 0.3s; }
 .trainer-role { margin: 0.3rem 0 1rem; color: var(--water); font-weight: 600; }
-.trainer-bio { margin: 0 0 1rem; }
+.trainer-bio { margin: 0 0 1rem; padding-left: 1.1rem; }
+.trainer-bio li + li { margin-top: 0.35rem; }
+.trainer-bio li::marker { color: var(--water); }
+.trainer-bio strong { font-weight: 700; }
 .trainer-teaches { margin: 0 0 1.1rem; font-size: 0.95rem; color: var(--ink-soft); }
 .trainer-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-weight: 600; font-size: 0.95rem; }
 
@@ -402,7 +430,7 @@ a { color: var(--water); text-underline-offset: 0.18em; }
   <section class="section" id="trainers" aria-labelledby="trainers-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="trainers-title">The trainers</h2>
+        <h2 id="trainers-title">Meet the Trainers</h2>
         <p id="trainers-intro"></p>
       </div>
       <div class="trainers" id="trainer-list"></div>
@@ -504,7 +532,7 @@ a { color: var(--water); text-underline-offset: 0.18em; }
         <div>
           <h3 class="trainer-name">${trigSVG("small")}<span class="hl">${esc(t.name)}</span></h3>
           <p class="trainer-role">${esc(t.role)}</p>
-          <p class="trainer-bio">${esc(t.bio)}</p>
+          <ul class="trainer-bio">${[].concat(t.bio || []).map(b => `<li>${esc(b).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}</li>`).join("")}</ul>
           ${t.teaches?.length ? `<p class="trainer-teaches">Teaches ${esc(list(t.teaches))}.</p>` : ""}
           ${links ? `<div class="trainer-links">${links}</div>` : ""}
         </div>
