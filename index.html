@@ -34,7 +34,7 @@ const TRAINERS = [
     shortName: "Mateen",
     role: "Enterprise GIS and spatial databases",
     bio: "Experienced GIS professional with over a decade of expertise in geospatial technologies, spatial data analysis, and enterprise GIS development. Skilled in implementing ESRI Utility Network, architecting ArcGIS Enterprise platforms, and administering Spatial Databases with advanced SQL/PLSQL workflows. Proficient in ESRI’s suite, FME, MapInfo, SpatialNet, and Hexagon technologies, with strong capability in building scalable solutions for mapping, integration, and analysis. Passionate about spatial data science and spatio-temporal modeling, with Journal publications, consultancy projects and the ability to excel independently or collaboratively. Dedicated to continuous learning and driving successful geospatial outcomes.",
-    photo: "",
+    photo: "images/mateen.jpg",
     links: { email: "", linkedin: "", website: "" }
   },
   {
@@ -43,7 +43,7 @@ const TRAINERS = [
     shortName: "Poshan",
     role: "Spatial epidemiology and analysis",
     bio: "Currently pursuing a PhD at the Institute for Geoinformatics, University of Münster, with a specialization in spatial epidemiology. A background in geomatics engineering, complemented by a Master’s degree in Geospatial Technologies, focusing on advanced spatial data analysis and processing techniques. Proficient in geographic information science, with expertise in spatial analysis, spatio-temporal modeling, and the application of modern technologies to address complex challenges in the field of spatial epidemiology.",
-    photo: "",
+    photo: "images/poshan.jpg",
     links: { email: "", linkedin: "", website: "" }
   },
   {
@@ -52,7 +52,7 @@ const TRAINERS = [
     shortName: "Saadoon",
     role: "GIS development and machine learning",
     bio: "GIS and geospatial technology professional with over seven years of experience in the GIS and IT industries. Holds a BE in Geographical Information Systems from NUST, Pakistan, and a Joint MSc in Geospatial Technologies from Universitat Jaume I, Universidade NOVA de Lisboa, and the University of Münster. Currently a PhD candidate at the GEOTEC Research Group, specialising in geospatial data analysis, GIS development, and machine learning. Proficient in ArcGIS, QGIS, JavaScript, Leaflet, GeoServer, PostGIS, and Python-based data analysis using libraries such as Pandas, GeoPandas, Scikit-learn, and TensorFlow. Over the past three years, has also trained GIS professionals in geospatial technologies, GIS workflows, and spatial data analysis.",
-    photo: "",
+    photo: "images/saadoon.jpg",
     links: { email: "", linkedin: "", website: "" }
   }
 ];
@@ -251,7 +251,7 @@ a { color: var(--water); text-underline-offset: 0.18em; }
 .trainer:first-child { padding-left: 0; border-left: 0; }
 .trainer:last-child { padding-right: 0; }
 .photo {
-  width: 100%; max-width: 14rem; aspect-ratio: 4 / 5; object-fit: cover;
+  width: 100%; max-width: 14rem; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%;
   border: 1.5px solid var(--ink); background: var(--paper-2);
   margin-bottom: 1.25rem;
 }
@@ -491,7 +491,7 @@ a { color: var(--water); text-underline-offset: 0.18em; }
     const parts = t.name.trim().split(/\s+/);
     const initials = (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
     const photo = t.photo
-      ? `<img class="photo" src="${esc(t.photo)}" alt="Portrait of ${esc(t.name)}" loading="lazy">`
+      ? `<img class="photo" src="${esc(t.photo)}" alt="Portrait of ${esc(t.name)}" loading="lazy" data-initials="${esc(initials)}">`
       : `<div class="photo initials" aria-hidden="true">${esc(initials)}</div>`;
     const links = [
       t.links?.email && `<a href="mailto:${esc(t.links.email)}">Email</a>`,
@@ -510,6 +510,15 @@ a { color: var(--water); text-underline-offset: 0.18em; }
         </div>
       </article>`;
   }).join("");
+
+  // If a photo is missing or fails to load, show the initials instead of a broken image
+  $("#trainer-list").querySelectorAll("img.photo").forEach(img => img.addEventListener("error", () => {
+    const box = document.createElement("div");
+    box.className = "photo initials";
+    box.setAttribute("aria-hidden", "true");
+    box.textContent = img.dataset.initials;
+    img.replaceWith(box);
+  }));
 
   /* ---------- Trainings ---------- */
   const topics = [...new Set(TRAININGS.flatMap(t => t.topics || []))].sort((a, b) => a.localeCompare(b));
